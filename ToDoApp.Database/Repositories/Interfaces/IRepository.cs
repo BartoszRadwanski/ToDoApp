@@ -9,7 +9,7 @@ namespace ToDoApp.Database.Repositories.Interfaces
     public interface IRepository<T>
     {
         List<T> GetAll();
-        T GetByName(T item);
+        T GetByName(string item);
         void Update(T item);
         void SaveChanges();
     }

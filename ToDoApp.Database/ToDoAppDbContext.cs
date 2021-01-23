@@ -11,7 +11,6 @@ namespace ToDoApp.Database
 {
     public class ToDoAppDbContext:DbContext
     {
-        public DbSet<Day> Days { get; set; }
         public DbSet<TaskToDo> DailyTasks { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

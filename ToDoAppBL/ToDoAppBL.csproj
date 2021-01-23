@@ -149,8 +149,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataValidation\DataValidation.cs" />
     <Compile Include="Enums\EPriority.cs" />
     <Compile Include="Enums\EStatus.cs" />
+    <Compile Include="Models\ToDoTaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoAppBL.Enums;
 
-namespace ToDoApp.Database.Entities
+namespace ToDoAppBL.Models
 {
-    public class TaskToDo
+    public class ToDoTaskModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }

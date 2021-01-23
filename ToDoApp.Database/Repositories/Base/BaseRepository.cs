@@ -15,5 +15,19 @@ namespace ToDoApp.Database.Repositories.Base
         {
             DbContext = dbContext;
         }
+
+        public List<T> GetAll()
+        {
+            var list = new List<T>();
+            var entities = DbSet;
+            foreach (var entity in entities)
+                list.Add(entity);
+            return list;
+        }
+
+        public void SaveChanges()
+        {
+            DbContext.SaveChanges();
+        }
     }
 }
