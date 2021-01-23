@@ -17,6 +17,8 @@ namespace ToDoApp
 {
     public partial class Form1 : Form
     {
+        ToDoTaskRepository toDoTaskRepository;
+        ToDoTaskMapper toDoTaskMapper;
         public Form1()
         {
             InitializeComponent();
@@ -31,8 +33,9 @@ namespace ToDoApp
                 //    Priority = EPriority.HighPriority,
                 //    Status = EStatus.InProgress
                 //});
-                ToDoTaskRepository toDoTaskRepository = new ToDoTaskRepository(dbContex);
-                ToDoTaskMapper toDoTaskMapper = new ToDoTaskMapper();
+                toDoTaskRepository = new ToDoTaskRepository(dbContex);
+                toDoTaskMapper = new ToDoTaskMapper();
+                
                 var dailyTask = toDoTaskRepository.GetByName("Test Bazy2");
                 var dataTaskModel = toDoTaskMapper.Map(dailyTask);
                 dataTaskModel.Description = "GodWhy2";
