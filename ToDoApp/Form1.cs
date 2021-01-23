@@ -19,30 +19,38 @@ namespace ToDoApp
     {
         ToDoTaskRepository toDoTaskRepository;
         ToDoTaskMapper toDoTaskMapper;
+        DayRepository dayRepository;
+        DayMapper dayMapper;
         public Form1()
         {
             InitializeComponent();
             using(var dbContex=new ToDoAppDbContext())
             {
                 dbContex.Database.EnsureCreated();
+                //dbContex.Days.Add(new Database.Entities.Day
+                //{
+                //    Date = DateTime.Today
+                //});
+                //dbContex.DailyTasks.Add(new TaskToDo
+                //{
+                //    DayId=1,
+                //    Name="Test1",
+                //    Description="meh",
+                //    Priority=EPriority.HighPriority,
+                //    Status=EStatus.InProgress,                   
+                //});
                 //dbContex.DailyTasks.Add(new TaskToDo
                 //{
                 //    Name = "Test Bazy2",
                 //    Description = "o moj bosz",
-                //    Date = DateTime.Today,
                 //    Priority = EPriority.HighPriority,
                 //    Status = EStatus.InProgress
                 //});
-                toDoTaskRepository = new ToDoTaskRepository(dbContex);
-                toDoTaskMapper = new ToDoTaskMapper();
-                
-                var dailyTask = toDoTaskRepository.GetByName("Test Bazy2");
-                var dataTaskModel = toDoTaskMapper.Map(dailyTask);
-                dataTaskModel.Description = "GodWhy2";
-                var newTask = toDoTaskMapper.Map(dataTaskModel);
-                toDoTaskRepository.Update(newTask);              
-                var cojeWBazie = dbContex.DailyTasks.ToList();
+                //toDoTaskRepository = new ToDoTaskRepository(dbContex);
+                //toDoTaskMapper = new ToDoTaskMapper();
+             
                 //dbContex.SaveChanges();
+                
             }
         }
     }

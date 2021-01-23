@@ -154,6 +154,7 @@
     <Compile Include="Enums\EPriority.cs" />
     <Compile Include="Enums\EStatus.cs" />
     <Compile Include="Enums\ETypeOfError.cs" />
+    <Compile Include="Models\DayModel.cs" />
     <Compile Include="Models\ToDoTaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

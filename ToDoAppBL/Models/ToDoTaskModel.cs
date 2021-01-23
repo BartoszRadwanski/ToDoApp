@@ -11,7 +11,6 @@ namespace ToDoAppBL.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public DateTime Date { get; set; }
         public EPriority Priority { get; set; }
         public EStatus Status { get; set; }
     }
