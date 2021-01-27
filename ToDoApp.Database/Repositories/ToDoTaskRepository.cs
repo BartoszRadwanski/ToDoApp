@@ -18,6 +18,12 @@ namespace ToDoApp.Database.Repositories
             return foundTask;
         }
 
+        public List<TaskToDo> GetByDate(Day day)
+        {
+            var foundTask = DbSet.Where(t => t.DayId == day.DayId).ToList();
+            return foundTask;
+        }
+
         public void Update(TaskToDo task)
         {
             var foundTask = DbSet.Where(t => t.Name == task.Name).FirstOrDefault();

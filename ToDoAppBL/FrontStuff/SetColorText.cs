@@ -8,10 +8,11 @@ using ToDoAppBL.Enums;
 
 namespace ToDoAppBL.OtherStuff
 {
-    public class SetColorText
+    public static class SetColorText
     {
-        public void SetStatusText(ref Label label,EStatus status)
+        public static void SetStatusText(ref Label label,EStatus status)
         {
+            label.Text = status.ToString();
             switch (status)
             {
                 case EStatus.InProgress:
@@ -29,8 +30,9 @@ namespace ToDoAppBL.OtherStuff
             }
         }
 
-        public void SetPriorityText(ref Label label, EPriority priority)
+        public static void SetPriorityText(ref Label label, EPriority priority)
         {
+            label.Text = priority.ToString();
             switch (priority)
             {
                 case EPriority.HighPriority:
@@ -48,9 +50,8 @@ namespace ToDoAppBL.OtherStuff
             }
         }
 
-        private void SetDetails(ref Label label, int status)
+        private static void SetDetails(ref Label label, int status)
         {
-            label.Text = status.ToString();
             switch (status)
             {
                 case 0:
@@ -64,10 +65,9 @@ namespace ToDoAppBL.OtherStuff
                     break;
                 default:
                     label.ForeColor = System.Drawing.Color.Black;
+                    label.Text = "Unknown";
                     break;
-            }
-                
-            
+            }            
         }
     }
 }

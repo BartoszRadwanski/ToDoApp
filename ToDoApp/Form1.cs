@@ -12,23 +12,30 @@ using ToDoApp.Database.Entities;
 using ToDoApp.Database.Repositories;
 using ToDoApp.Mappers;
 using ToDoAppBL.Enums;
+using ToDoAppBL.FrontStuff;
 using ToDoAppBL.Models;
+using ToDoAppBL.OtherStuff;
 
 namespace ToDoApp
 {
     public partial class Form1 : Form
     {
+        //SetColorText setColorTexk;
         ToDoTaskRepository toDoTaskRepository;
         ToDoTaskMapper toDoTaskMapper;
         DayRepository dayRepository;
         DayMapper dayMapper;
+        
+        List<ToDoTaskModel> myTasks;
         public Form1()
         {
             InitializeComponent();
             BindMyButtonsToEvent();
 
+            //setColorTexk = new SetColorText();
             dayMapper = new DayMapper();
             toDoTaskMapper = new ToDoTaskMapper();
+            
             using (var dbContex = new ToDoAppDbContext())
             {
                 dbContex.Database.EnsureCreated();
@@ -52,6 +59,8 @@ namespace ToDoApp
                 dbContex.SaveChanges();
 
             }
+            LoadDataToMyComboBox();
+            SetUpMyListBox();
             mainTimer.Start();
         }
         /// <summary>
@@ -98,5 +107,69 @@ namespace ToDoApp
             labelDate.Text = DateTime.Now.ToString("dd MMMM yyyy");
             labelHour.Text = DateTime.Now.ToString("HH:mm:ss");
         }
+
+        private void LoadDataToMyComboBox() //przerób na ogólny potem przenieś! ogólnie przemyśl ;d
+        {
+            using (var dbContex = new ToDoAppDbContext())
+            {
+                dayRepository = new DayRepository(dbContex);
+                var myDayList = dayRepository.GetAll().AsParallel();
+                comboBoxDates.DisplayMember = "Date";
+                if (myDayList != null)
+                {
+                    foreach (var day in myDayList)
+                    {
+                        var dayModel = dayMapper.Map(day);
+                        comboBoxDates.Items.Add(dayModel);
+                    }
+                    comboBoxDates.SelectedIndex = comboBoxDates.Items.Count-1;
+                }
+                else
+                {
+                    MessageBox.Show("Brak danych");
+                }                            
+            }
+        }
+        //bez kontenerków przemyślo potem
+        private void SetUpMyListBox()
+        {
+            myTasks = new List<ToDoTaskModel>();
+            try
+            {
+                using (var dbContex = new ToDoAppDbContext())
+                {
+                    dayRepository = new DayRepository(dbContex);
+                    toDoTaskRepository = new ToDoTaskRepository(dbContex);
+                    DayModel item = (DayModel)comboBoxDates.SelectedItem;
+                   
+                    var day = dayRepository.GetByDate(dayMapper.Map(item).Date);
+                    var dailyTasks = toDoTaskRepository.GetByDate(day).AsParallel();
+                    if (dailyTasks != null)
+                    {
+                        listBox1.DisplayMember = "Name";
+                        foreach (var task in dailyTasks)
+                        {
+                            var taskModel = toDoTaskMapper.Map(task);
+                            listBox1.Items.Add(taskModel);
+                            myTasks.Add(taskModel);
+                        }
+                        listBox1.Update();
+                        listBox1.SelectedItem = listBox1.Items[0];
+                        FindNextTask.GetNextTask(myTasks, ref labelNextTaskValue);
+                    }                 
+                }
+            }catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+          
+        }
+
+        private void listBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var item = (ToDoTaskModel)listBox1.SelectedItem;
+            SetUpTaskDetails.SetUpMyDetails(item, ref labelTitleValue, ref labelStatusValue, ref labelPriorityValue, ref richTextBoxDescription);
+        }        
+
     }
 }

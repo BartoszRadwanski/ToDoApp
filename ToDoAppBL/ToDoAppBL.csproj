@@ -155,9 +155,11 @@
     <Compile Include="Enums\EPriority.cs" />
     <Compile Include="Enums\EStatus.cs" />
     <Compile Include="Enums\ETypeOfError.cs" />
+    <Compile Include="FrontStuff\FindNextTask.cs" />
+    <Compile Include="FrontStuff\SetUpTaskDetails.cs" />
     <Compile Include="Models\DayModel.cs" />
     <Compile Include="Models\ToDoTaskModel.cs" />
-    <Compile Include="OtherStuff\SetColorText.cs" />
+    <Compile Include="FrontStuff\SetColorText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
