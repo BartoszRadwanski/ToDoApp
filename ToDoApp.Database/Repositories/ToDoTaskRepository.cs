@@ -29,6 +29,7 @@ namespace ToDoApp.Database.Repositories
             }
             foundTask.Name = task.Name;
             foundTask.Description = task.Description;
+            foundTask.DayId = task.DayId;
             foundTask.Priority = task.Priority;
             foundTask.Status = task.Status;
             SaveChanges();

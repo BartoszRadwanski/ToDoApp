@@ -8,8 +8,8 @@ namespace ToDoAppBL.Enums
 {
     public enum EPriority
     {
-        HighPriority,
+        LowPriority,
         MediumPriority,
-        LowPriority
+        HighPriority       
     }
 }

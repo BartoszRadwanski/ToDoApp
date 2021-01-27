@@ -8,8 +8,8 @@ namespace ToDoAppBL.Enums
 {
     public enum EStatus
     {
-        InProgress,
         Canceled,
+        InProgress,
         Done
     }
 }
