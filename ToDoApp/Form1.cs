@@ -70,7 +70,7 @@ namespace ToDoApp
         {
             buttonAdd.Click += MyButtonClickEvent;
             buttonEdit.Click += MyButtonClickEvent;
-            buttonOption.Click += MyButtonClickEvent;
+            buttonHelp.Click += MyButtonClickEvent;
             buttonClose.Click += MyButtonClickEvent;
         }
 
@@ -80,15 +80,17 @@ namespace ToDoApp
         /// <param name="sender">Button</param>
         /// <param name="e">Click Event</param>
         private void MyButtonClickEvent(object sender, EventArgs e)
-        {;
+        {
             if (sender == buttonAdd)
             {
-                MessageBox.Show("Add");
+                FormAdd formAdd = new FormAdd(false);
+                formAdd.ShowDialog();
             }else if (sender == buttonEdit)
             {
-                MessageBox.Show("Edit");
+                FormAdd formAdd = new FormAdd(true,(ToDoTaskModel)listBoxDailyTasks.SelectedItem);
+                formAdd.ShowDialog();
             }
-            else if (sender == buttonOption)
+            else if (sender == buttonHelp)
             {
                 MessageBox.Show("Option");
             }
@@ -146,15 +148,15 @@ namespace ToDoApp
                     var dailyTasks = toDoTaskRepository.GetByDate(day).AsParallel();
                     if (dailyTasks != null)
                     {
-                        listBox1.DisplayMember = "Name";
+                        listBoxDailyTasks.DisplayMember = "Name";
                         foreach (var task in dailyTasks)
                         {
                             var taskModel = toDoTaskMapper.Map(task);
-                            listBox1.Items.Add(taskModel);
+                            listBoxDailyTasks.Items.Add(taskModel);
                             myTasks.Add(taskModel);
                         }
-                        listBox1.Update();
-                        listBox1.SelectedItem = listBox1.Items[0];
+                        listBoxDailyTasks.Update();
+                        listBoxDailyTasks.SelectedItem = listBoxDailyTasks.Items[0];
                         FindNextTask.GetNextTask(myTasks, ref labelNextTaskValue);
                     }                 
                 }
@@ -167,9 +169,10 @@ namespace ToDoApp
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            var item = (ToDoTaskModel)listBox1.SelectedItem;
+            var item = (ToDoTaskModel)listBoxDailyTasks.SelectedItem;
             SetUpTaskDetails.SetUpMyDetails(item, ref labelTitleValue, ref labelStatusValue, ref labelPriorityValue, ref richTextBoxDescription);
-        }        
+        }
 
+        
     }
 }
