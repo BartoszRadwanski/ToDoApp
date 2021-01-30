@@ -119,16 +119,21 @@ namespace ToDoApp
             if (sender == buttonAdd)
             {
                 CreateTask();
-                //wywołaj dodanie/sprawdzenie
+                PrintMessage("Pomyślnie dodano do bazy.");
             }
             else if (sender==buttonEdit)
             {
                 CreateTask();
-                //wywołaj edycje/sprawdzenie
+                PrintMessage("Pomyślnie wprowadzono zmiany do bazy.");
             }else if (sender == buttonClose)
             {
                 this.Close();
             }
+        }
+
+        private void PrintMessage(string text)
+        {
+            MessageBox.Show($"{text}");
         }
 
         //pomyśł jak to wyciągnąć na zewnątrz!

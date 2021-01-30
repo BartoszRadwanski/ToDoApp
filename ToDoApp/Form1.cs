@@ -20,7 +20,6 @@ namespace ToDoApp
 {
     public partial class Form1 : Form
     {
-        //SetColorText setColorTexk;
         ToDoTaskRepository toDoTaskRepository;
         ToDoTaskMapper toDoTaskMapper;
         DayRepository dayRepository;
@@ -67,10 +66,12 @@ namespace ToDoApp
             {
                 FormAdd formAdd = new FormAdd(false);
                 formAdd.ShowDialog();
+                LoadDataToMyComboBox();
             }else if (sender == buttonEdit)
             {
                 FormAdd formAdd = new FormAdd(true,(ToDoTaskModel)listBoxDailyTasks.SelectedItem);
                 formAdd.ShowDialog();
+                LoadDataToMyComboBox();
             }
             else if (sender == buttonHelp)
             {
