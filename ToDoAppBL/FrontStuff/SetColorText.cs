@@ -10,6 +10,11 @@ namespace ToDoAppBL.OtherStuff
 {
     public static class SetColorText
     {
+        /// <summary>
+        /// This fucntion set up string value for status to print.
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="status"></param>
         public static void SetStatusText(ref Label label,EStatus status)
         {
             label.Text = status.ToString();
@@ -29,7 +34,11 @@ namespace ToDoAppBL.OtherStuff
                     break;
             }
         }
-
+        /// <summary>
+        /// This fucntion set up string value for priority to print
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="priority"></param>
         public static void SetPriorityText(ref Label label, EPriority priority)
         {
             label.Text = priority.ToString();
@@ -49,7 +58,11 @@ namespace ToDoAppBL.OtherStuff
                     break;
             }
         }
-
+        /// <summary>
+        /// This fucntion chagne font color.
+        /// </summary>
+        /// <param name="label"></param>
+        /// <param name="status"></param>
         private static void SetDetails(ref Label label, int status)
         {
             switch (status)

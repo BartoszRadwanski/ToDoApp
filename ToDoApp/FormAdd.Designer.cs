@@ -30,6 +30,7 @@ namespace ToDoApp
         private void InitializeComponent()
         {
             this.panelButtons = new System.Windows.Forms.Panel();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.panelStatus = new System.Windows.Forms.Panel();
@@ -50,8 +51,7 @@ namespace ToDoApp
             this.panel2 = new System.Windows.Forms.Panel();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonEdit = new System.Windows.Forms.Button();
+            this.textBoxDate = new System.Windows.Forms.TextBox();
             this.panelButtons.SuspendLayout();
             this.panelStatus.SuspendLayout();
             this.panelPriority.SuspendLayout();
@@ -70,6 +70,18 @@ namespace ToDoApp
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(359, 131);
             this.panelButtons.TabIndex = 0;
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEdit.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonEdit.ForeColor = System.Drawing.Color.White;
+            this.buttonEdit.Location = new System.Drawing.Point(1, 47);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(358, 41);
+            this.buttonEdit.TabIndex = 2;
+            this.buttonEdit.Text = "Edit";
+            this.buttonEdit.UseVisualStyleBackColor = true;
             // 
             // buttonClose
             // 
@@ -273,31 +285,19 @@ namespace ToDoApp
             this.label4.TabIndex = 7;
             this.label4.Text = "Date:";
             // 
-            // textBox1
+            // textBoxDate
             // 
-            this.textBox1.Location = new System.Drawing.Point(45, 211);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(194, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // buttonEdit
-            // 
-            this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEdit.Font = new System.Drawing.Font("Segoe Print", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonEdit.ForeColor = System.Drawing.Color.White;
-            this.buttonEdit.Location = new System.Drawing.Point(1, 47);
-            this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(358, 41);
-            this.buttonEdit.TabIndex = 2;
-            this.buttonEdit.Text = "Edit";
-            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.textBoxDate.Location = new System.Drawing.Point(45, 211);
+            this.textBoxDate.Name = "textBoxDate";
+            this.textBoxDate.Size = new System.Drawing.Size(194, 20);
+            this.textBoxDate.TabIndex = 8;
             // 
             // FormAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 376);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxDate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.panel2);
@@ -342,7 +342,7 @@ namespace ToDoApp
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxDate;
         private System.Windows.Forms.Button buttonEdit;
     }
 }

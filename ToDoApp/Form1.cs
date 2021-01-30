@@ -31,32 +31,14 @@ namespace ToDoApp
         {
             InitializeComponent();
             BindMyButtonsToEvent();
-
-            //setColorTexk = new SetColorText();
             dayMapper = new DayMapper();
             toDoTaskMapper = new ToDoTaskMapper();
             
             using (var dbContex = new ToDoAppDbContext())
             {
                 dbContex.Database.EnsureCreated();
-                // dbContex.Days.Add(dayMapper.Map(new DayModel
-                // {
-                //     Date = DateTime.Today
-                // }));
-
-
-                //dbContex.DailyTasks.Add(toDoTaskMapper.Map(new ToDoTaskModel
-                //{
-                //    DayId=1,
-                //    Name = "Test Bazy4",
-                //    Description = "o moj bosz",
-                //    Priority = EPriority.LowPriority,
-                //    Status = EStatus.Done
-                //}));
-                //toDoTaskRepository = new ToDoTaskRepository(dbContex);
-                //toDoTaskMapper = new ToDoTaskMapper();
-
-                dbContex.SaveChanges();
+              
+               // dbContex.SaveChanges();
 
             }
             LoadDataToMyComboBox();
@@ -136,6 +118,7 @@ namespace ToDoApp
         private void SetUpMyListBox()
         {
             myTasks = new List<ToDoTaskModel>();
+            listBoxDailyTasks.Items.Clear();
             try
             {
                 using (var dbContex = new ToDoAppDbContext())
@@ -173,6 +156,10 @@ namespace ToDoApp
             SetUpTaskDetails.SetUpMyDetails(item, ref labelTitleValue, ref labelStatusValue, ref labelPriorityValue, ref richTextBoxDescription);
         }
 
-        
+        private void comboBoxDates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //listBoxDailyTasks.Items.Clear();
+            SetUpMyListBox();
+        }
     }
 }

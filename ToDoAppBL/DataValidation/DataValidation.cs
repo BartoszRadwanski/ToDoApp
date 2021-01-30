@@ -10,7 +10,7 @@ namespace ToDoAppBL.DataValidation
 {
     public class DataValidation
     {
-        public bool isNameCorrect(string input,ETypeOfError eTypeOfError)
+        public bool isNameCorrect(string input)
         {
             if (!String.IsNullOrWhiteSpace(input))
             {
@@ -20,25 +20,23 @@ namespace ToDoAppBL.DataValidation
                 }
                 else
                 {
-                    eTypeOfError = ETypeOfError.WrongDataFormat;
-                    PrintError(eTypeOfError);
+                    PrintError(ETypeOfError.WrongDataFormat);
                     return false;
                 }
             }
             else
             {
-                eTypeOfError = ETypeOfError.NullOrWhiteSpaces;
-                PrintError(eTypeOfError);
+                PrintError(ETypeOfError.NullOrWhiteSpaces);
                 return false;
             }
             
         }
 
-        public bool isDescriptionCorrect(string input, ETypeOfError eTypeOfError)
+        public bool isDescriptionCorrect(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
-                eTypeOfError = ETypeOfError.NullOrWhiteSpaces;
+                PrintError(ETypeOfError.NullOrWhiteSpaces);
                 return false;
             }
             else
@@ -47,11 +45,11 @@ namespace ToDoAppBL.DataValidation
             }
         }
 
-        public bool isDateCorrect(string input,ETypeOfError eTypeOfError)
+        public bool isDateCorrect(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
             {
-                eTypeOfError = ETypeOfError.NullOrWhiteSpaces;
+                PrintError(ETypeOfError.NullOrWhiteSpaces);
                 return false;
             }
             else
@@ -63,7 +61,7 @@ namespace ToDoAppBL.DataValidation
                 }
                 else
                 {
-                    eTypeOfError = ETypeOfError.WrongDateFormat;
+                    PrintError(ETypeOfError.WrongDateFormat);
                     return false;
                 }
             }

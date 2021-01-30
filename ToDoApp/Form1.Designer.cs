@@ -84,7 +84,7 @@ namespace ToDoApp
             this.labelHour.AutoSize = true;
             this.labelHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelHour.ForeColor = System.Drawing.Color.White;
-            this.labelHour.Location = new System.Drawing.Point(52, 135);
+            this.labelHour.Location = new System.Drawing.Point(52, 115);
             this.labelHour.Name = "labelHour";
             this.labelHour.Size = new System.Drawing.Size(49, 20);
             this.labelHour.TabIndex = 7;
@@ -95,7 +95,7 @@ namespace ToDoApp
             this.labelDate.AutoSize = true;
             this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelDate.ForeColor = System.Drawing.Color.White;
-            this.labelDate.Location = new System.Drawing.Point(23, 93);
+            this.labelDate.Location = new System.Drawing.Point(23, 73);
             this.labelDate.Name = "labelDate";
             this.labelDate.Size = new System.Drawing.Size(46, 24);
             this.labelDate.TabIndex = 6;
@@ -104,11 +104,11 @@ namespace ToDoApp
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(22, 23);
+            this.label1.Location = new System.Drawing.Point(22, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 30);
+            this.label1.Size = new System.Drawing.Size(135, 38);
             this.label1.TabIndex = 5;
             this.label1.Text = "Todo app";
             // 
@@ -314,6 +314,7 @@ namespace ToDoApp
             this.comboBoxDates.Name = "comboBoxDates";
             this.comboBoxDates.Size = new System.Drawing.Size(134, 21);
             this.comboBoxDates.TabIndex = 14;
+            this.comboBoxDates.SelectedIndexChanged += new System.EventHandler(this.comboBoxDates_SelectedIndexChanged);
             // 
             // panelRight
             // 

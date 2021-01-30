@@ -19,6 +19,12 @@ namespace ToDoApp.Database.Repositories
             return foundDay;
         }
 
+        public Day GetById(int id)
+        {
+            var foundDay = DbSet.Where(d => d.DayId==id).FirstOrDefault();
+            return foundDay;
+        }
+
         public void Update(Day day)
         {
             var foundDay = DbSet.Where(d => d.Date == day.Date).FirstOrDefault();
