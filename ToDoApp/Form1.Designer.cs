@@ -57,6 +57,7 @@ namespace ToDoApp
             this.label9 = new System.Windows.Forms.Label();
             this.labelNextTaskValue = new System.Windows.Forms.Label();
             this.panelMiddle = new System.Windows.Forms.Panel();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.panelMiddle.SuspendLayout();
@@ -65,6 +66,7 @@ namespace ToDoApp
             // panelLeft
             // 
             this.panelLeft.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panelLeft.Controls.Add(this.buttonDelete);
             this.panelLeft.Controls.Add(this.labelHour);
             this.panelLeft.Controls.Add(this.labelDate);
             this.panelLeft.Controls.Add(this.label1);
@@ -121,7 +123,7 @@ namespace ToDoApp
             this.buttonClose.Location = new System.Drawing.Point(27, 384);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(0);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(130, 60);
+            this.buttonClose.Size = new System.Drawing.Size(130, 45);
             this.buttonClose.TabIndex = 4;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = false;
@@ -132,10 +134,10 @@ namespace ToDoApp
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHelp.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonHelp.ForeColor = System.Drawing.Color.White;
-            this.buttonHelp.Location = new System.Drawing.Point(27, 316);
+            this.buttonHelp.Location = new System.Drawing.Point(27, 334);
             this.buttonHelp.Margin = new System.Windows.Forms.Padding(0);
             this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(130, 60);
+            this.buttonHelp.Size = new System.Drawing.Size(130, 45);
             this.buttonHelp.TabIndex = 3;
             this.buttonHelp.Text = "Help";
             this.buttonHelp.UseVisualStyleBackColor = false;
@@ -146,10 +148,10 @@ namespace ToDoApp
             this.buttonEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonEdit.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonEdit.ForeColor = System.Drawing.Color.White;
-            this.buttonEdit.Location = new System.Drawing.Point(27, 248);
+            this.buttonEdit.Location = new System.Drawing.Point(27, 234);
             this.buttonEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEdit.Name = "buttonEdit";
-            this.buttonEdit.Size = new System.Drawing.Size(130, 60);
+            this.buttonEdit.Size = new System.Drawing.Size(130, 45);
             this.buttonEdit.TabIndex = 2;
             this.buttonEdit.Text = "Edit";
             this.buttonEdit.UseVisualStyleBackColor = false;
@@ -160,10 +162,10 @@ namespace ToDoApp
             this.buttonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAdd.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAdd.ForeColor = System.Drawing.Color.White;
-            this.buttonAdd.Location = new System.Drawing.Point(27, 180);
+            this.buttonAdd.Location = new System.Drawing.Point(27, 185);
             this.buttonAdd.Margin = new System.Windows.Forms.Padding(0);
             this.buttonAdd.Name = "buttonAdd";
-            this.buttonAdd.Size = new System.Drawing.Size(130, 60);
+            this.buttonAdd.Size = new System.Drawing.Size(130, 45);
             this.buttonAdd.TabIndex = 1;
             this.buttonAdd.Text = "Add";
             this.buttonAdd.UseVisualStyleBackColor = false;
@@ -364,6 +366,20 @@ namespace ToDoApp
             this.panelMiddle.Size = new System.Drawing.Size(247, 450);
             this.panelMiddle.TabIndex = 18;
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.BackColor = System.Drawing.SystemColors.Highlight;
+            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelete.Font = new System.Drawing.Font("Segoe Print", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.Color.White;
+            this.buttonDelete.Location = new System.Drawing.Point(27, 284);
+            this.buttonDelete.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(130, 45);
+            this.buttonDelete.TabIndex = 8;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,6 +434,7 @@ namespace ToDoApp
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label labelNextTaskValue;
         private System.Windows.Forms.Panel panelMiddle;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
 

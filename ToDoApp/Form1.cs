@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToDoApp.Database;
-using ToDoApp.Database.Entities;
 using ToDoApp.Database.Repositories;
 using ToDoApp.Mappers;
-using ToDoAppBL.Enums;
 using ToDoAppBL.FrontStuff;
 using ToDoAppBL.Models;
-using ToDoAppBL.OtherStuff;
 
 namespace ToDoApp
 {
@@ -24,6 +16,7 @@ namespace ToDoApp
         ToDoTaskMapper toDoTaskMapper;
         DayRepository dayRepository;
         DayMapper dayMapper;
+        ToDoTaskMapper taskMapper;
         
         List<ToDoTaskModel> myTasks;
         public Form1()
@@ -32,6 +25,7 @@ namespace ToDoApp
             BindMyButtonsToEvent();
             dayMapper = new DayMapper();
             toDoTaskMapper = new ToDoTaskMapper();
+            taskMapper = new ToDoTaskMapper();
             
             using (var dbContex = new ToDoAppDbContext())
             {
@@ -53,6 +47,7 @@ namespace ToDoApp
             buttonEdit.Click += MyButtonClickEvent;
             buttonHelp.Click += MyButtonClickEvent;
             buttonClose.Click += MyButtonClickEvent;
+            buttonDelete.Click += MyButtonClickEvent;
         }
 
         /// <summary>
@@ -76,6 +71,9 @@ namespace ToDoApp
             else if (sender == buttonHelp)
             {
                 MessageBox.Show("Option");
+            }else if(sender== buttonDelete)
+            {
+                DeleteItem();
             }
             else if (sender == buttonClose)
             {
@@ -98,10 +96,11 @@ namespace ToDoApp
             using (var dbContex = new ToDoAppDbContext())
             {
                 dayRepository = new DayRepository(dbContex);
-                var myDayList = dayRepository.GetAll().AsParallel();
+                var myDayList = dayRepository.GetAll().AsParallel();               
                 comboBoxDates.DisplayMember = "Date";
                 if (myDayList != null)
                 {
+                    myDayList.OrderBy(d => d.Date).AsParallel();
                     foreach (var day in myDayList)
                     {
                         var dayModel = dayMapper.Map(day);
@@ -111,7 +110,7 @@ namespace ToDoApp
                 }
                 else
                 {
-                    MessageBox.Show("Brak danych");
+                    MessageBox.Show("No data");
                 }                            
             }
         }
@@ -147,20 +146,35 @@ namespace ToDoApp
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
-            }
-          
+            }          
         }
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             var item = (ToDoTaskModel)listBoxDailyTasks.SelectedItem;
-            SetUpTaskDetails.SetUpMyDetails(item, ref labelTitleValue, ref labelStatusValue, ref labelPriorityValue, ref richTextBoxDescription);
+            SetUpTaskDetails.SetUpMyDetails(
+                                           (ToDoTaskModel)listBoxDailyTasks.SelectedItem
+                                            ,ref labelTitleValue, ref labelStatusValue
+                                            ,ref labelPriorityValue, ref richTextBoxDescription);
         }
 
         private void comboBoxDates_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //listBoxDailyTasks.Items.Clear();
             SetUpMyListBox();
+        }
+
+        private void DeleteItem()
+        {
+            using (var dbContex = new ToDoAppDbContext())
+            {
+                dayRepository = new DayRepository(dbContex);
+                toDoTaskRepository = new ToDoTaskRepository(dbContex);
+                var itemToDelete = toDoTaskRepository.GetByName(toDoTaskMapper.Map((ToDoTaskModel)listBoxDailyTasks.SelectedItem).Name);
+                dbContex.DailyTasks.Remove(itemToDelete);
+                dbContex.SaveChanges();
+                LoadDataToMyComboBox();
+                MessageBox.Show("Task was deleted");
+            }
         }
     }
 }

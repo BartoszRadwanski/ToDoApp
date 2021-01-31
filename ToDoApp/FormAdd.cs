@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ToDoApp.Database;
 using ToDoApp.Database.Repositories;
@@ -119,12 +112,12 @@ namespace ToDoApp
             if (sender == buttonAdd)
             {
                 CreateTask();
-                PrintMessage("Pomyślnie dodano do bazy.");
+                PrintMessage("Successfully added to the base.");
             }
             else if (sender==buttonEdit)
             {
                 CreateTask();
-                PrintMessage("Pomyślnie wprowadzono zmiany do bazy.");
+                PrintMessage("Database changes successfully made.");
             }else if (sender == buttonClose)
             {
                 this.Close();

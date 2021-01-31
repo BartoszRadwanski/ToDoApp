@@ -72,19 +72,19 @@ namespace ToDoAppBL.DataValidation
             switch (eTypeOfError)
             {
                 case ETypeOfError.NullOrWhiteSpaces:
-                    return $"Tekst nie może być pusty lub składać się wyłącznie z białych znaków.";
+                    return $"The text cannot be empty or contain only white space.";
                 case ETypeOfError.WrongDataFormat:
-                    return $"Wprowadzono niewłaściwą wartość.";
+                    return $"An incorrect value has been entered.";
                 case ETypeOfError.WrongDateFormat:
-                    return $"Podano niepoprwany format daty (dd-mm-yyyy).";
+                    return $"An unsupported date format was provided (dd-mm-yyyy).";
                 default:
-                    return $"Napotkano nieznany błąd.";
+                    return $"An unknown error has been encountered.";
             }
         }
 
         public void PrintError(ETypeOfError eTypeOfError)
         {
-            MessageBox.Show(GetMessageText(eTypeOfError), "Komuniat", MessageBoxButtons.OK);
+            MessageBox.Show(GetMessageText(eTypeOfError), "Communication", MessageBoxButtons.OK);
         }
     }
 }
