@@ -383,6 +383,8 @@ namespace ToDoApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(751, 450);
             this.Controls.Add(this.panelMiddle);
@@ -393,7 +395,6 @@ namespace ToDoApp
             this.Controls.Add(this.panelLeft);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
             this.panelLeft.ResumeLayout(false);
             this.panelLeft.PerformLayout();
             this.panelRight.ResumeLayout(false);

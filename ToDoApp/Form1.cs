@@ -32,13 +32,10 @@ namespace ToDoApp
             
             using (var dbContex = new ToDoAppDbContext())
             {
-                dbContex.Database.EnsureCreated();
-              
-               // dbContex.SaveChanges();
-
+                dbContex.Database.EnsureCreated();             
             }
             LoadDataToMyComboBox();
-            SetUpMyListBox();
+            //SetUpMyListBox();
             mainTimer.Start();
         }
         /// <summary>
@@ -62,14 +59,11 @@ namespace ToDoApp
         {
             if (sender == buttonAdd)
             {
-                FormAdd formAdd = new FormAdd(false);
-                formAdd.ShowDialog();
-                LoadDataToMyComboBox();
-            }else if (sender == buttonEdit)
+                OpenAddWindow();
+            }
+            else if (sender == buttonEdit)
             {
-                FormAdd formAdd = new FormAdd(true,(ToDoTaskModel)listBoxDailyTasks.SelectedItem);
-                formAdd.ShowDialog();
-                LoadDataToMyComboBox();
+                OpenEditWindow();
             }
             else if (sender == buttonHelp)
             {
@@ -77,14 +71,58 @@ namespace ToDoApp
                 formHelp.ShowDialog();
             }else if(sender== buttonDelete)
             {
-                deleteItem.DeleteSelectedItem(dayRepository, toDoTaskRepository, listBoxDailyTasks, toDoTaskMapper);
-                LoadDataToMyComboBox();
+                DeleteSelectedItem();
+
             }
             else if (sender == buttonClose)
             {
                 Application.Exit();
             }
         }
+
+        /// <summary>
+        /// This function is resposible for invoke method to delete choosen item.
+        /// </summary>
+        private void DeleteSelectedItem()
+        {
+            if (listBoxDailyTasks.Items.Count>0)
+            {
+                deleteItem.DeleteSelectedItem(dayRepository, toDoTaskRepository, listBoxDailyTasks, toDoTaskMapper);
+                LoadDataToMyComboBox();
+            }
+            else
+            {
+                MessageBox.Show("No data to delete.");
+            }
+            
+        }
+
+        /// <summary>
+        /// This function is responsible for opening the task creation window
+        /// </summary>
+        private void OpenAddWindow()
+        {
+            FormAdd formAdd = new FormAdd(false);
+            formAdd.ShowDialog();
+            LoadDataToMyComboBox();
+        }
+        /// <summary>
+        /// This function is responsible for opening the window for editing tasks
+        /// </summary>
+        private void OpenEditWindow()
+        {
+            if (listBoxDailyTasks.SelectedItem != null)
+            {
+                FormAdd formAdd = new FormAdd(true, (ToDoTaskModel)listBoxDailyTasks.SelectedItem);
+                formAdd.ShowDialog();
+                LoadDataToMyComboBox();
+            }
+            else
+            {
+                MessageBox.Show("No data to edit.");
+            }
+        }
+
         /// <summary>
         /// This function passes values ​​to gui for the current date and date.
         /// </summary>
@@ -101,6 +139,7 @@ namespace ToDoApp
         /// </summary>
         private void LoadDataToMyComboBox()
         {
+            comboBoxDates.Items.Clear();
             using (var dbContex = new ToDoAppDbContext())
             {
                 dayRepository = new DayRepository(dbContex);
@@ -118,7 +157,7 @@ namespace ToDoApp
                 }
                 else
                 {
-                    MessageBox.Show("No data");
+                    MessageBox.Show("No data.");
                 }                            
             }
         }
@@ -128,7 +167,7 @@ namespace ToDoApp
         private void SetUpMyListBox()
         {
             myTasks = new List<ToDoTaskModel>();
-            listBoxDailyTasks.Items.Clear();
+            listBoxDailyTasks.Items.Clear();       
             try
             {
                 using (var dbContex = new ToDoAppDbContext())
@@ -155,8 +194,9 @@ namespace ToDoApp
                 }
             }catch(Exception e)
             {
-                MessageBox.Show(e.Message);
-            }          
+                MessageBox.Show("There are no tasks for the selected day");
+            } 
+            
         }
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)

@@ -68,7 +68,7 @@ namespace ToDoAppBL.OtherStuff
             switch (status)
             {
                 case 0:
-                    label.ForeColor = System.Drawing.Color.AliceBlue;
+                    label.ForeColor = System.Drawing.Color.Blue;
                     break;
                 case 1:
                     label.ForeColor = System.Drawing.Color.Green;

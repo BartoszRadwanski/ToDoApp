@@ -18,7 +18,7 @@ namespace ToDoApp.CRUID
             using (var dbContex = new ToDoAppDbContext())
             {
                 dayRepository = new DayRepository(dbContex);
-                toDoTaskRepository = new ToDoTaskRepository(dbContex);
+                toDoTaskRepository = new ToDoTaskRepository(dbContex);                
                 var itemToDelete = toDoTaskRepository.GetByName(toDoTaskMapper.Map((ToDoTaskModel)listBoxDailyTasks.SelectedItem).Name);
                 if (itemToDelete != null)
                 {

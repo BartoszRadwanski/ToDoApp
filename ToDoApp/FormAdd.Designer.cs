@@ -65,7 +65,7 @@ namespace ToDoApp
             this.panelButtons.Controls.Add(this.buttonClose);
             this.panelButtons.Controls.Add(this.buttonAdd);
             this.panelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelButtons.Location = new System.Drawing.Point(0, 245);
+            this.panelButtons.Location = new System.Drawing.Point(0, 242);
             this.panelButtons.Margin = new System.Windows.Forms.Padding(0);
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(359, 131);
@@ -296,7 +296,8 @@ namespace ToDoApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(359, 376);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(359, 373);
             this.Controls.Add(this.textBoxDate);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dateTimePicker1);
@@ -306,6 +307,8 @@ namespace ToDoApp
             this.Controls.Add(this.panelStatus);
             this.Controls.Add(this.panelButtons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAdd";
             this.panelButtons.ResumeLayout(false);
             this.panelStatus.ResumeLayout(false);

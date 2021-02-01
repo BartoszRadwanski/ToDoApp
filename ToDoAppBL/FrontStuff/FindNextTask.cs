@@ -18,7 +18,7 @@ namespace ToDoAppBL.FrontStuff
         /// <param name="label"></param>
         public static void GetNextTask(List<ToDoTaskModel> myDailyTaskList, ref Label label)
         {
-            var nextTask = myDailyTaskList.OrderBy(t => t.Status == EStatus.InProgress).ThenByDescending(t => t.Priority).FirstOrDefault();
+            var nextTask = myDailyTaskList.OrderByDescending(t => t.Status == EStatus.InProgress).ThenByDescending(t => t.Priority).FirstOrDefault();
             label.Text = nextTask.Name;
         }
     }

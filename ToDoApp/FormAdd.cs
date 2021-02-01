@@ -138,24 +138,14 @@ namespace ToDoApp
             if (sender == buttonAdd)
             {
                 addItem.CreateTask(taskValidation, dayRepository, taskRepository, dayMapper, textBoxName, textBoxDate, richTextBoxDescription, statusValue, priorityValue);
-                PrintMessage("Successfully added to the base.");
             }
             else if (sender==buttonEdit)
             {
                 addItem.CreateTask(taskValidation, dayRepository, taskRepository, dayMapper, textBoxName, textBoxDate, richTextBoxDescription, statusValue, priorityValue);
-                PrintMessage("Database changes successfully made.");
             }else if (sender == buttonClose)
             {
                 this.Close();
             }
-        }
-        /// <summary>
-        /// This function is responsible for communicating messages to the user.
-        /// </summary>
-        /// <param name="text"></param>
-        private void PrintMessage(string text)
-        {
-            MessageBox.Show($"{text}");
         }
 
         /// <summary>
@@ -167,14 +157,14 @@ namespace ToDoApp
         {
             if (sender == radioButtonPriorityHigh)
             {
-                priorityValue = 0;
+                priorityValue = 2;
             }else if (sender == radioButtonPriorityMedium)
             {
                 priorityValue = 1;
             }
             else if (sender == radioButtonPriorityLow)
             {
-                priorityValue = 2;
+                priorityValue = 0;
             }
             else if (sender == radioButtonStatusInProgress)
             {

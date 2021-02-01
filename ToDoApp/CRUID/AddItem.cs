@@ -41,6 +41,7 @@ namespace ToDoApp.CRUID
                         Priority = priorityValue
                     });
                 }
+                MessageBox.Show("The database was successfully modified");
             }
         }
     }
