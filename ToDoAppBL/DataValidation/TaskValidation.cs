@@ -13,7 +13,13 @@ namespace ToDoAppBL.DataValidation
         {
             dataValidation = new DataValidation();
         }
-
+        /// <summary>
+        /// This function calls methods that check user input.
+        /// </summary>
+        /// <param name="nameInput"></param>
+        /// <param name="descriptionInput"></param>
+        /// <param name="dateInput"></param>
+        /// <returns>bool isDateCorrect</returns>
         public bool isInputOk(string nameInput, string descriptionInput, string dateInput)
         {
             bool[] isOk = { false, false, false };
@@ -22,7 +28,11 @@ namespace ToDoAppBL.DataValidation
             isOk[2] = dataValidation.isDateCorrect(dateInput);
             return CheckArrya(isOk);
         }
-
+        /// <summary>
+        /// This function checks if the result of data checking was positive.
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
         private bool CheckArrya(bool[] array)
         {
             for(int i = 0; i < array.Length; i++)

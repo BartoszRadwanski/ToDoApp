@@ -27,6 +27,13 @@ namespace ToDoAppBL.FrontStuff
             richTextBoxDescription.Text = toDoTaskModel.Description;
         }
 
+        /// <summary>
+        /// This function is input data from model to textBoxes
+        /// </summary>
+        /// <param name="toDoTaskModel"></param>
+        /// <param name="name"></param>
+        /// <param name="fkDay"></param>
+        /// <param name="description"></param>
         public static void SetUpTextValuesInForm(ToDoTaskModel toDoTaskModel,ref TextBox name,ref int fkDay,ref RichTextBox description)
           {
               description.Text = toDoTaskModel.Description;
@@ -34,6 +41,14 @@ namespace ToDoAppBL.FrontStuff
               fkDay = toDoTaskModel.DayId;
           }
 
+        /// <summary>
+        /// This function is setting up the radion buttons value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="r1"></param>
+        /// <param name="r2"></param>
+        /// <param name="r3"></param>
+        /// <param name="outValue"></param>
         public static void SetUpRadioButtonDefaultCheck(int value, ref RadioButton r1, ref RadioButton r2, ref RadioButton r3, 
             ref int outValue)
         {

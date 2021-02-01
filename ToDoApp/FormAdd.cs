@@ -6,6 +6,7 @@ using ToDoApp.Mappers;
 using ToDoAppBL.DataValidation;
 using ToDoAppBL.Models;
 using ToDoAppBL.FrontStuff;
+using ToDoApp.CRUID;
 
 namespace ToDoApp
 {
@@ -17,12 +18,14 @@ namespace ToDoApp
         private DayRepository dayRepository;
         private ToDoTaskRepository taskRepository;
         private DayMapper dayMapper;
+        private AddItem addItem;
         int priorityValue=1, statusValue=1, fkDay;
         public FormAdd(bool isEdtion)
         {
             InitializeComponent();
             this.isEdtion = isEdtion;
             taskValidation = new TaskValidation();
+            addItem = new AddItem();
             AddClickEvents();
             AddIsCheckEvents();
             setDate();
@@ -34,6 +37,9 @@ namespace ToDoApp
             SetUpValuesInForm();
         }
 
+        /// <summary>
+        /// This function loads all data into the form when editing data.
+        /// </summary>
         private void SetUpValuesInForm()
         {
             SetUpTaskDetails.SetUpTextValuesInForm(taskModel, ref textBoxName, ref fkDay, ref richTextBoxDescription);
@@ -46,7 +52,9 @@ namespace ToDoApp
             }
             LoadRadioButtonValue();
         }
-
+        /// <summary>
+        /// This function sets the values ​​for radio buttons in case of editing data.
+        /// </summary>
         private void LoadRadioButtonValue()
         {
             SetUpTaskDetails.SetUpRadioButtonDefaultCheck((int)taskModel.Priority,ref radioButtonPriorityLow, 
@@ -60,6 +68,9 @@ namespace ToDoApp
         {
             this.Close();
         }
+        /// <summary>
+        /// This function assigns calendar values ​​to a text box.
+        /// </summary>
         private void setDate()
         {
             textBoxDate.Text = dateTimePicker1.Value.Date.ToString();
@@ -69,19 +80,25 @@ namespace ToDoApp
         {
             setDate();
         }
-
+        /// <summary>
+        /// This function is responsible for preparing the user interface.
+        /// </summary>
         private void SetTheAvailabilityOfGuiElements()
         {
             SetUpRadioButtonsState();
             SetUpButtonsState();
         }
-
+        /// <summary>
+        /// This function changes the availability of the buttons
+        /// </summary>
         private void SetUpButtonsState()
         {
             buttonEdit.Enabled = isEdtion;
             buttonAdd.Enabled = !isEdtion;
         }
-
+        /// <summary>
+        /// This function sets default values ​​for radio buttons.
+        /// </summary>
         private void SetUpRadioButtonsState()
         {
           radioButtonPriorityMedium.Checked = true;
@@ -89,14 +106,18 @@ namespace ToDoApp
           radioButtonStatusCanceled.Enabled = isEdtion;
           radioButtonStatusDone.Enabled = isEdtion;
         }
-
+        /// <summary>
+        /// This function assigns an event to the appropriate controls.
+        /// </summary>
         private void AddClickEvents()
         {
             buttonAdd.Click += MyButtonClickEvent;
             buttonEdit.Click += MyButtonClickEvent;
             buttonClose.Click += MyButtonClickEvent;
         }
-
+        /// <summary>
+        /// This function assigns an event to the appropriate controls.
+        /// </summary>
         private void AddIsCheckEvents()
         {
             radioButtonPriorityLow.Click+= MyRadionButtonIsCheck;
@@ -107,59 +128,41 @@ namespace ToDoApp
             radioButtonStatusInProgress.Click += MyRadionButtonIsCheck;
         }
 
+        /// <summary>
+        /// This function is responsible for the operation of the buttons.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MyButtonClickEvent(object sender, EventArgs e)
         {
             if (sender == buttonAdd)
             {
-                CreateTask();
+                addItem.CreateTask(taskValidation, dayRepository, taskRepository, dayMapper, textBoxName, textBoxDate, richTextBoxDescription, statusValue, priorityValue);
                 PrintMessage("Successfully added to the base.");
             }
             else if (sender==buttonEdit)
             {
-                CreateTask();
+                addItem.CreateTask(taskValidation, dayRepository, taskRepository, dayMapper, textBoxName, textBoxDate, richTextBoxDescription, statusValue, priorityValue);
                 PrintMessage("Database changes successfully made.");
             }else if (sender == buttonClose)
             {
                 this.Close();
             }
         }
-
+        /// <summary>
+        /// This function is responsible for communicating messages to the user.
+        /// </summary>
+        /// <param name="text"></param>
         private void PrintMessage(string text)
         {
             MessageBox.Show($"{text}");
         }
 
-        //pomyśł jak to wyciągnąć na zewnątrz!
-        private void CreateTask()
-        {
-            bool isCorrect=taskValidation.isInputOk(textBoxName.Text,richTextBoxDescription.Text,textBoxDate.Text);
-            if (isCorrect)
-            {
-                using (var dbContex = new ToDoAppDbContext())
-                {
-                    dayRepository = new DayRepository(dbContex);
-                    taskRepository = new ToDoTaskRepository(dbContex);
-                    var myDay = dayRepository.GetByDate(DateTime.Parse(textBoxDate.Text));
-                    if (myDay == null)
-                    {
-                        dayMapper = new DayMapper();
-                        var tempDay = new DayModel();
-                        tempDay.Date = DateTime.Parse(textBoxDate.Text);
-                        dayRepository.Update(dayMapper.Map(tempDay));                          
-                    }
-                    myDay = dayRepository.GetByDate(DateTime.Parse(textBoxDate.Text));
-                    taskRepository.Update(new Database.Entities.TaskToDo
-                    {
-                        Name = textBoxName.Text,
-                        Description = richTextBoxDescription.Text,
-                        DayId = myDay.DayId,
-                        Status = statusValue,
-                        Priority = priorityValue
-                    });
-                }
-            }
-        }
-             
+        /// <summary>
+        /// This function is responsible for setting the appropriate values ​​after changing the state of the radio buttons.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MyRadionButtonIsCheck(object sender, EventArgs e)
         {
             if (sender == radioButtonPriorityHigh)
@@ -183,7 +186,6 @@ namespace ToDoApp
             {
                 statusValue = 0;
             }
-
         }
     
     }

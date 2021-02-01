@@ -11,6 +11,11 @@ namespace ToDoAppBL.FrontStuff
 {
     public static class FindNextTask
     {
+        /// <summary>
+        /// This function searches for the next highest priority task to be performed for the day.
+        /// </summary>
+        /// <param name="myDailyTaskList"></param>
+        /// <param name="label"></param>
         public static void GetNextTask(List<ToDoTaskModel> myDailyTaskList, ref Label label)
         {
             var nextTask = myDailyTaskList.OrderBy(t => t.Status == EStatus.InProgress).ThenByDescending(t => t.Priority).FirstOrDefault();

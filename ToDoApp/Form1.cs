@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using ToDoApp.CRUID;
 using ToDoApp.Database;
 using ToDoApp.Database.Repositories;
 using ToDoApp.Mappers;
@@ -17,6 +18,7 @@ namespace ToDoApp
         DayRepository dayRepository;
         DayMapper dayMapper;
         ToDoTaskMapper taskMapper;
+        DeleteItem deleteItem;
         
         List<ToDoTaskModel> myTasks;
         public Form1()
@@ -26,6 +28,7 @@ namespace ToDoApp
             dayMapper = new DayMapper();
             toDoTaskMapper = new ToDoTaskMapper();
             taskMapper = new ToDoTaskMapper();
+            deleteItem = new DeleteItem();
             
             using (var dbContex = new ToDoAppDbContext())
             {
@@ -70,10 +73,12 @@ namespace ToDoApp
             }
             else if (sender == buttonHelp)
             {
-                MessageBox.Show("Option");
+                Form2 formHelp = new Form2();
+                formHelp.ShowDialog();
             }else if(sender== buttonDelete)
             {
-                DeleteItem();
+                deleteItem.DeleteSelectedItem(dayRepository, toDoTaskRepository, listBoxDailyTasks, toDoTaskMapper);
+                LoadDataToMyComboBox();
             }
             else if (sender == buttonClose)
             {
@@ -91,7 +96,10 @@ namespace ToDoApp
             labelHour.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-        private void LoadDataToMyComboBox() //przerób na ogólny potem przenieś! ogólnie przemyśl ;d
+        /// <summary>
+        /// This function is loading date into comboBix and order them
+        /// </summary>
+        private void LoadDataToMyComboBox()
         {
             using (var dbContex = new ToDoAppDbContext())
             {
@@ -114,7 +122,9 @@ namespace ToDoApp
                 }                            
             }
         }
-        //bez kontenerków przemyślo potem
+        /// <summary>
+        /// This function is loading daily task to listBox 
+        /// </summary>
         private void SetUpMyListBox()
         {
             myTasks = new List<ToDoTaskModel>();
@@ -151,7 +161,6 @@ namespace ToDoApp
 
         private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            var item = (ToDoTaskModel)listBoxDailyTasks.SelectedItem;
             SetUpTaskDetails.SetUpMyDetails(
                                            (ToDoTaskModel)listBoxDailyTasks.SelectedItem
                                             ,ref labelTitleValue, ref labelStatusValue
@@ -162,19 +171,6 @@ namespace ToDoApp
         {
             SetUpMyListBox();
         }
-
-        private void DeleteItem()
-        {
-            using (var dbContex = new ToDoAppDbContext())
-            {
-                dayRepository = new DayRepository(dbContex);
-                toDoTaskRepository = new ToDoTaskRepository(dbContex);
-                var itemToDelete = toDoTaskRepository.GetByName(toDoTaskMapper.Map((ToDoTaskModel)listBoxDailyTasks.SelectedItem).Name);
-                dbContex.DailyTasks.Remove(itemToDelete);
-                dbContex.SaveChanges();
-                LoadDataToMyComboBox();
-                MessageBox.Show("Task was deleted");
-            }
-        }
+       
     }
 }

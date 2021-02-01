@@ -9,7 +9,11 @@ using ToDoAppBL.Enums;
 namespace ToDoAppBL.DataValidation
 {
     public class DataValidation
-    {
+    {/// <summary>
+     /// This function validates the entered task name.
+     /// </summary>
+     /// <param name="input"></param>
+     /// <returns></returns>
         public bool isNameCorrect(string input)
         {
             if (!String.IsNullOrWhiteSpace(input))
@@ -31,7 +35,11 @@ namespace ToDoAppBL.DataValidation
             }
             
         }
-
+        /// <summary>
+        /// This function validates the entered job description.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public bool isDescriptionCorrect(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -44,7 +52,11 @@ namespace ToDoAppBL.DataValidation
                 return true;
             }
         }
-
+        /// <summary>
+        /// This function validates the entered date.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public bool isDateCorrect(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
@@ -66,7 +78,11 @@ namespace ToDoAppBL.DataValidation
                 }
             }
         }
-
+        /// <summary>
+        /// This function returns the body value for the given message.
+        /// </summary>
+        /// <param name="eTypeOfError"></param>
+        /// <returns></returns>
         public string GetMessageText(ETypeOfError eTypeOfError)
         {
             switch (eTypeOfError)
@@ -81,7 +97,10 @@ namespace ToDoAppBL.DataValidation
                     return $"An unknown error has been encountered.";
             }
         }
-
+        /// <summary>
+        /// This function displays an error message to the user.
+        /// </summary>
+        /// <param name="eTypeOfError"></param>
         public void PrintError(ETypeOfError eTypeOfError)
         {
             MessageBox.Show(GetMessageText(eTypeOfError), "Communication", MessageBoxButtons.OK);
